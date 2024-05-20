@@ -17,19 +17,19 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('''
                                     
-        The following commands are available:
+          The following commands are available:
                                     
-        /start -> Welcome Message
-        /help -> This message
-        /feet -> Convert feet to cm
-        /inches -> Convert inches to cm
-        /miles -> Convert miles to km
-        /pounds -> Convert pounds to kg and g
-        /founce -> Convert fluid ounce to L and mL
-        /ounce -> Convert ounce to kg and g
-        /cup -> Convert cup to mL
-        /gallon -> Convert gallon to L
-        /fahrenheit -> Convert Fahrenheit to Celcius
+          /start -> Welcome Message
+          /help -> This message
+          /feet -> Convert feet to cm
+          /inches -> Convert inches to cm
+          /miles -> Convert miles to km
+          /pounds -> Convert pounds to kg and g
+          /founce -> Convert fluid ounce to L and mL
+          /ounce -> Convert ounce to kg and g
+          /cup -> Convert cup to mL
+          /gallon -> Convert gallon to L
+          /fahrenheit -> Convert Fahrenheit to Celcius
                                     ''')
 
 async def feet_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -394,11 +394,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f'Update {update} caused error {context.error}')
 
-async def main():
-    app = Application.builder().token(TOKEN).build()
-    app.add_handler(CommandHandler('start', start_command))
 
-     # Commands
+if __name__ == '__main__':
+    print('starting bot...')
+
+    app = Application.builder().token(TOKEN).build()
+
+    # Commands
     app.add_handler(CommandHandler('start', start_command))
     app.add_handler(CommandHandler('help', help_command))
     app.add_handler(CommandHandler('feet', feet_command))
@@ -412,20 +414,13 @@ async def main():
     app.add_handler(CommandHandler('fahrenheit', fahrenheit_command))
     app.add_handler(CommandHandler('currencies', currencies_command))
 
+
     # Messages
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
     # Error
     app.add_error_handler(error)
 
-    # Start the bot
-    print('Starting bot...')
-    await app.start_polling()
-    await asyncio.Future()
-
-if __name__ == '__main__':
-    try:
-        asyncio.run(main())
-    except Exception as e:
-        print(f'An error has occurred: {e}')
-
+    # Polls the bot
+    print('polling...')
+    app.run_polling(poll_interval=3)
