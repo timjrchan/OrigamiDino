@@ -394,49 +394,38 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f'Update {update} caused error {context.error}')
 
+async def main():
+    app = Application.builder().token(TOKEN).build()
+    app.add_handler(CommandHandler('start', start_command))
+
+     # Commands
+    app.add_handler(CommandHandler('start', start_command))
+    app.add_handler(CommandHandler('help', help_command))
+    app.add_handler(CommandHandler('feet', feet_command))
+    app.add_handler(CommandHandler('inches', inches_command))
+    app.add_handler(CommandHandler('miles', miles_command))
+    app.add_handler(CommandHandler('pounds', pounds_command))
+    app.add_handler(CommandHandler('founce', founce_command))
+    app.add_handler(CommandHandler('ounce', ounce_command))
+    app.add_handler(CommandHandler('cup', cup_command))
+    app.add_handler(CommandHandler('gallon', gallon_command))
+    app.add_handler(CommandHandler('fahrenheit', fahrenheit_command))
+    app.add_handler(CommandHandler('currencies', currencies_command))
+
+    # Messages
+    app.add_handler(MessageHandler(filters.TEXT, handle_message))
+
+    # Error
+    app.add_error_handler(error)
+
+    # Start the bot
+    print('Starting bot...')
+    await app.start_polling()
+    await asyncio.Future()
 
 if __name__ == '__main__':
-    print('starting bot...')
-    # create a new event loop
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-
     try:
-
-        app = Application.builder().token(TOKEN).build()
-
-        # Commands
-        app.add_handler(CommandHandler('start', start_command))
-        app.add_handler(CommandHandler('help', help_command))
-        app.add_handler(CommandHandler('feet', feet_command))
-        app.add_handler(CommandHandler('inches', inches_command))
-        app.add_handler(CommandHandler('miles', miles_command))
-        app.add_handler(CommandHandler('pounds', pounds_command))
-        app.add_handler(CommandHandler('founce', founce_command))
-        app.add_handler(CommandHandler('ounce', ounce_command))
-        app.add_handler(CommandHandler('cup', cup_command))
-        app.add_handler(CommandHandler('gallon', gallon_command))
-        app.add_handler(CommandHandler('fahrenheit', fahrenheit_command))
-        app.add_handler(CommandHandler('currencies', currencies_command))
-
-
-        # Messages
-        app.add_handler(MessageHandler(filters.TEXT, handle_message))
-
-        # Error
-        app.add_error_handler(error)
-
-        # Polls the bot
-        print('polling...')
-        app.run_polling(poll_interval=3) # use if running on local machine
-        loop.run_until_complete(app.start_polling())
-        loop.run_forever()
-
-
+        asyncio.run(main())
     except Exception as e:
-        print(f'An error has occured {e}')
+        print(f'An error has occurred: {e}')
 
-    finally:
-        loop.stop()
-        loop.close()
-        print('Bot Stopped')
