@@ -1,0 +1,4 @@
+asyncio
+yfinance
+pandas
+python-telegram-bot
