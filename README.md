@@ -1,4 +1,9 @@
-# OrigamiDino
-This is a personal project for creating a telegram bot that helps with converting imperial into metric units. It is also able to retrieve the previous day's currency rate for Malaysia Ringgit, Australian Dollars, Hong Kong Dollars, and US Dollars.
+<img src='images/Origami_Triceratops.jpg' style="width: 65%; height: auto;">
 
-At the moment, this bot is only callable when it is initialized locally. 
+# OrigamiDino
+
+Hi there! This is my pet project for a telegram bot. At the moment, this telegram bot will have to be run locally on a machine. 
+
+Folds ahoy, Telegram friends! It's your friendly neighborhood Origami Triceratops here!
+
+Ever get tangled up with imperial units while chatting? This little bot is your papery pal for converting them in a flash! No more hunting down conversion charts online. Just send your imperial measurements my way, and I'll fold them neatly into metric units for you. Imagine, imperial units becoming crisp, compact data packets delivered straight to your metric needs! Pretty neat, huh?
